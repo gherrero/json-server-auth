@@ -122,7 +122,7 @@ const login: Handler = (req, res, next) => {
 
 			return new Promise<string>((resolve, reject) => {
 				jwt.sign(
-					{ email, realm_access: { roles: user.roles } },
+					{ email, realm_access: { roles: user.roles },resource_access: {'realm-management': {roles:[user.permissions]}} },
 					JWT_SECRET_KEY,
 					{ expiresIn: JWT_EXPIRES_IN, subject: String(user.id) },
 					(error, idToken) => {
